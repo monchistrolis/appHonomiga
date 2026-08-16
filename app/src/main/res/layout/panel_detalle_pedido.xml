@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/paper">
+
+    <!-- Estado vacío: se muestra cuando ningún pedido está seleccionado -->
+    <LinearLayout
+        android:id="@+id/detailEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecciona un pedido para ver el detalle"
+            android:textColor="@color/ink_soft"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/detailContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Encabezado -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvDetPedidoId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/crust"
+                    tools:text="Pedido #0007" />
+
+                <ImageButton
+                    android:id="@+id/btnDetCerrar"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Cerrar"
+                    android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDetEstadoChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_chip_estado"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:textColor="@color/crumb"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="Pendiente" />
+
+            <!-- Cliente -->
+            <TextView
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Cliente"
+                android:textStyle="bold"
+                android:textColor="@color/ink_soft" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDetCliente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:textColor="@color/ink"
+                        tools:text="RODRIGO JPL" />
+
+                    <TextView
+                        android:id="@+id/tvDetTelefono"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="@color/ink_soft"
+                        tools:text="+56 9 1234 5678" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btnDetWhatsapp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_btn_sage"
+                    android:contentDescription="WhatsApp"
+                    android:padding="6dp"
+                    android:src="@android:drawable/ic_menu_call" />
+            </LinearLayout>
+
+            <!-- Fecha y hora -->
+            <TextView
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Fecha y hora"
+                android:textStyle="bold"
+                android:textColor="@color/ink_soft" />
+
+            <TextView
+                android:id="@+id/tvDetFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="14sp"
+                android:textColor="@color/ink"
+                tools:text="Viernes 7 de agosto 2026" />
+
+            <TextView
+                android:id="@+id/tvDetHora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/ink"
+                tools:text="16:00" />
+
+            <!-- Productos -->
+            <TextView
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Productos"
+                android:textStyle="bold"
+                android:textColor="@color/ink_soft" />
+
+            <LinearLayout
+                android:id="@+id/llDetProductos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="vertical" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/border_soft" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="Total"
+                    android:textStyle="bold"
+                    android:textColor="@color/ink" />
+
+                <TextView
+                    android:id="@+id/tvDetTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/rye"
+                    tools:text="$12.500" />
+            </LinearLayout>
+
+            <!-- Documento -->
+            <TextView
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Documento"
+                android:textStyle="bold"
+                android:textColor="@color/ink_soft" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/crumb"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tvDetDocumentoNombre"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="13sp"
+                    android:textColor="@color/ink"
+                    tools:text="Boleta Rodrigo JPL.pdf" />
+
+                <ImageButton
+                    android:id="@+id/btnDetDocumentoDescargar"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Ver documento"
+                    android:src="@android:drawable/ic_menu_view" />
+            </LinearLayout>
+
+            <!-- Entrega / notas -->
+            <TextView
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Entrega / notas"
+                android:textStyle="bold"
+                android:textColor="@color/ink_soft" />
+
+            <TextView
+                android:id="@+id/tvDetEntrega"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="14sp"
+                android:textColor="@color/ink"
+                tools:text="Retiro en local" />
+
+            <TextView
+                android:id="@+id/tvDetNotas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/ink_soft"
+                tools:text="Sin notas adicionales" />
+
+            <!-- Estado del pedido (stepper) -->
+            <TextView
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Estado del pedido"
+                android:textStyle="bold"
+                android:textColor="@color/ink_soft" />
+
+            <LinearLayout
+                android:id="@+id/llDetStepper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" />
+
+            <!-- Acciones -->
+            <TextView
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Acciones"
+                android:textStyle="bold"
+                android:textColor="@color/ink_soft" />
+
+            <Button
+                android:id="@+id/btnAccionAvanzar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_btn_rye"
+                android:paddingVertical="10dp"
+                android:textAllCaps="false"
+                android:textColor="@color/crumb"
+                tools:text="Marcar como en preparación" />
+
+            <Button
+                android:id="@+id/btnAccionCancelar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_btn_outline_danger"
+                android:paddingVertical="10dp"
+                android:text="Cancelar pedido"
+                android:textAllCaps="false"
+                android:textColor="@color/danger" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

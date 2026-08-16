@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/crumb"
+    tools:context=".ReservasActivity">
+
+    <!-- Header estilo navbar-horno del sitio (fondo crust, texto crumb) -->
+    <LinearLayout
+        android:id="@+id/headerBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/crust"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="14dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Horno &amp; Miga"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/crumb" />
+
+        <Button
+            android:id="@+id/btnCompletados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
+            android:layout_marginEnd="8dp"
+            android:text="Completados ✔"
+            android:textAllCaps="false"
+            android:textSize="13sp"
+            android:textColor="@color/crumb"
+            android:background="@drawable/bg_btn_sage" />
+
+        <Button
+            android:id="@+id/btnCerrarSesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
+            android:text="Cerrar sesión"
+            android:textAllCaps="false"
+            android:textSize="13sp"
+            android:textColor="@color/gold"
+            android:background="@drawable/bg_btn_outline_gold" />
+
+    </LinearLayout>
+
+    <!-- Pane primario (lista/grilla) + pane secundario (detalle). En pantallas
+         anchas (tablet) SlidingPaneLayout los muestra lado a lado solo; en
+         pantallas angostas (teléfono) el detalle se desliza por encima de la
+         lista y ocupa toda la pantalla. Esto es automático, no hay que
+         calcular anchos a mano. -->
+    <androidx.slidingpanelayout.widget.SlidingPaneLayout
+        android:id="@+id/slidingPane"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Pane primario: lista/grilla semanal -->
+        <FrameLayout
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/scrollLista"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/bottomBar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- Navegación de semana -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Reservas"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/crust" />
+
+                            <Button
+                                android:id="@+id/btnSemanaAnterior"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                android:padding="8dp"
+                                android:background="@android:color/transparent"
+                                android:text="‹"
+                                android:textSize="20sp"
+                                android:textColor="@color/crust" />
+
+                            <TextView
+                                android:id="@+id/tvRangoSemana"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="4dp"
+                                android:textStyle="bold"
+                                android:textSize="14sp"
+                                android:textColor="@color/ink"
+                                tools:text="3 – 8 de agosto 2026" />
+
+                            <Button
+                                android:id="@+id/btnSemanaSiguiente"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                android:padding="8dp"
+                                android:background="@android:color/transparent"
+                                android:text="›"
+                                android:textSize="20sp"
+                                android:textColor="@color/crust" />
+
+                        </LinearLayout>
+
+                        <!-- Tarjetas de resumen (pedidos / total / documentos) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="6dp"
+                                android:background="@color/paper"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:id="@+id/tvStatPedidos"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:textSize="18sp"
+                                    android:textColor="@color/crust"
+                                    tools:text="11" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Pedidos"
+                                    android:textSize="11sp"
+                                    android:textColor="@color/ink_soft" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginHorizontal="6dp"
+                                android:background="@color/paper"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:id="@+id/tvStatTotal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/crust"
+                                    tools:text="$83.000" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Total mostrado"
+                                    android:textSize="11sp"
+                                    android:textColor="@color/ink_soft" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="6dp"
+                                android:background="@color/paper"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:id="@+id/tvStatDocumentos"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:textSize="18sp"
+                                    android:textColor="@color/crust"
+                                    tools:text="11" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Documentos"
+                                    android:textSize="11sp"
+                                    android:textColor="@color/ink_soft" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!-- Filtros por estado -->
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:scrollbars="none">
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/chipGroupFiltros"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:singleSelection="true"
+                                app:selectionRequired="true"
+                                app:chipSpacingHorizontal="6dp">
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chipTodos"
+                                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="true"
+                                    android:text="Todos" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chipPendientes"
+                                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Pendientes" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chipPreparacion"
+                                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="En preparación" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chipListos"
+                                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Listos" />
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chipEntregados"
+                                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Entregados" />
+
+                            </com.google.android.material.chip.ChipGroup>
+                        </HorizontalScrollView>
+
+                        <!-- Grilla semanal (Lunes a Domingo), armada por código.
+                             Sin scroll horizontal: las 7 columnas se reparten
+                             el ancho disponible en partes iguales. -->
+                        <LinearLayout
+                            android:id="@+id/llWeekGrid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal" />
+
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateTint="@color/gold"
+                    app:layout_constraintTop_toTopOf="@id/scrollLista"
+                    app:layout_constraintBottom_toBottomOf="@id/scrollLista"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvVacioOError"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="24dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:textColor="@color/ink_soft"
+                    app:layout_constraintTop_toTopOf="@id/scrollLista"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!-- Barra inferior fija: total período, resumen por estado, consejo del día -->
+                <LinearLayout
+                    android:id="@+id/bottomBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/paper"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total período mostrado"
+                            android:textSize="10sp"
+                            android:textColor="@color/ink_soft" />
+
+                        <TextView
+                            android:id="@+id/tvTotalPeriodo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/rye"
+                            tools:text="$83.000" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvResumenPendientes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="10sp"
+                            android:textColor="@color/estado_pendiente"
+                            tools:text="Pendientes 10" />
+
+                        <TextView
+                            android:id="@+id/tvResumenPreparacion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="10sp"
+                            android:textColor="@color/estado_en_preparacion"
+                            tools:text="En preparación 0" />
+
+                        <TextView
+                            android:id="@+id/tvResumenListos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="10sp"
+                            android:textColor="@color/estado_listo"
+                            tools:text="Listos 0" />
+
+                        <TextView
+                            android:id="@+id/tvResumenEntregados"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="10sp"
+                            android:textColor="@color/estado_entregado"
+                            tools:text="Entregados 1" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvConsejoDelDia"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="10sp"
+                        android:textColor="@color/ink_soft"
+                        tools:text="¡Buen día! Recuerda revisar los pedidos pendientes." />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+
+        <!-- Pane secundario: detalle del pedido seleccionado -->
+        <include
+            layout="@layout/panel_detalle_pedido"
+            android:layout_width="380dp"
+            android:layout_height="match_parent" />
+
+    </androidx.slidingpanelayout.widget.SlidingPaneLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

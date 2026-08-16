@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Misma paleta que css/style.css del sitio web -->
+    <color name="crust">#2B1D14</color>
+    <color name="crumb">#F5E8CB</color>
+    <color name="gold">#C98A2C</color>
+    <color name="rye">#8B3A2A</color>
+    <color name="sage">#6B7B54</color>
+    <color name="paper">#FBF6EC</color>
+    <color name="ink">#241812</color>
+    <color name="ink_soft">#5B4A3D</color>
+    <color name="estado_pendiente">#F5A623</color>
+    <color name="estado_en_preparacion">#4A90D9</color>
+    <color name="estado_listo">#4CAF50</color>
+    <color name="estado_entregado">#9E9E9E</color>
+    <color name="danger">#D9534F</color>
+    <color name="border_soft">#E5DDD0</color>
+    <color name="gold_soft">#FFF3D6</color>
+</resources>

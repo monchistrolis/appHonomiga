@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1044422023723",
+    "project_id": "hornomiga-71227",
+    "storage_bucket": "hornomiga-71227.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044422023723:android:869e04c8bcfc860fcfe86e",
+        "android_client_info": {
+          "package_name": "com.example.hornomigaadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044422023723-dcja64aov23tikboo57457afbibrgsph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKjA7MIrGZytc5vkWXx4nghD_Ys9Y0QfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044422023723-dcja64aov23tikboo57457afbibrgsph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

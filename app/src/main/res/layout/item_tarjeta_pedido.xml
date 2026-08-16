@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardPedido"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/paper"
+    app:strokeColor="@color/gold"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/tvHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:textColor="@color/crust"
+            android:maxLines="1"
+            tools:text="13:00" />
+
+        <TextView
+            android:id="@+id/tvNombreCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/ink"
+            tools:text="Víctor Benítez" />
+
+        <TextView
+            android:id="@+id/tvResumenItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:textSize="9sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/ink_soft"
+            tools:text="1× Pan Integral" />
+
+        <TextView
+            android:id="@+id/tvTotalTarjeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/rye"
+            tools:text="$3.500" />
+
+        <TextView
+            android:id="@+id/tvEstadoTarjeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textStyle="bold"
+            android:textSize="8sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="Pendiente" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
