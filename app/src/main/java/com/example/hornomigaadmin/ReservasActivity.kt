@@ -201,7 +201,14 @@ class ReservasActivity : AppCompatActivity() {
                 }
 
                 // Los pedidos cancelados no se muestran en la vista operativa semanal.
-                todasLasReservas = snapshot?.documents?.mapNotNull { it.toObject(Reserva::class.java) }
+                // Cada documento se convierte por separado: si uno solo tiene un campo
+                // que no calza con el modelo, se salta ese (y queda en Logcat) en vez
+                // de que toda la lista quede vacía por un solo documento con problemas.
+                todasLasReservas = snapshot?.documents?.mapNotNull { doc ->
+                    runCatching { doc.toObject(Reserva::class.java) }
+                        .onFailure { e -> android.util.Log.e("ReservasActivity", "No se pudo leer la reserva ${doc.id}", e) }
+                        .getOrNull()
+                }
                     ?.filter { it.estadoNormalizado != Estado.CANCELADO }
                     ?: emptyList()
 

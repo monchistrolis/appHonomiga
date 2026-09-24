@@ -59,7 +59,11 @@ class CompletadosActivity : AppCompatActivity() {
                     return@addSnapshotListener
                 }
 
-                val completados = snapshot?.documents?.mapNotNull { it.toObject(Reserva::class.java) }
+                val completados = snapshot?.documents?.mapNotNull { doc ->
+                    runCatching { doc.toObject(Reserva::class.java) }
+                        .onFailure { e -> android.util.Log.e("CompletadosActivity", "No se pudo leer la reserva ${doc.id}", e) }
+                        .getOrNull()
+                }
                     ?: emptyList()
 
                 if (completados.isEmpty()) {
